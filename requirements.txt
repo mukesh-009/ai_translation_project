@@ -4,3 +4,4 @@ torchaudio
 transformers
 sentencepiece
 openai-whisper
+gTTS
