@@ -1,1 +1,31 @@
-ffmpeg
+# /Users/mukeshruwali/Developer/ai_translation_project/requirements.txt
+streamlit
+torch==2.2.2+cpu
+torchaudio==2.2.2+cpu
+--extra-index-url https://download.pytorch.org/whl/cpu
+transformers==4.41.2
+sentencepiece
+openai-whisper
+gTTS
+sacremoses
+
+
+import streamlit as st
+import whisper
+from transformers import MarianTokenizer, MarianMTModel
+
+@st.cache_resource
+def load_asr_model():
+    return whisper.load_model("tiny")
+
+@st.cache_resource
+def load_translation_model():
+    tokenizer = MarianTokenizer.from_pretrained("Helsinki-NLP/opus-mt-en-hi")
+    model = MarianMTModel.from_pretrained("Helsinki-NLP/opus-mt-en-hi")
+    return tokenizer, model
+
+# Load models once at startup
+asr_model = load_asr_model()
+tokenizer, translation_model = load_translation_model()
+
+# rest of your app.py code where you use asr_model and tokenizer, translation_model instead of loading inside upload block
