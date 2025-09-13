@@ -1,6 +1,0 @@
-streamlit
-torch
-torchaudio
-transformers
-sentencepiece
-openai-whisper
